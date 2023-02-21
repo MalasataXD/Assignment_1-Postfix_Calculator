@@ -4,5 +4,5 @@ import java.util.ArrayList;
 
 public interface IPostfixCalculator
 {
-    int evaluateExpression(ArrayList<Token> tokenList);
+    int evaluateExpression(ArrayList<Token> tokenList) throws Exception;
 }
