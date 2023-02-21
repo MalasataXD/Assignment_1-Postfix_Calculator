@@ -3,6 +3,7 @@ package Code.Implementation;
 import Code.Interfaces.IPostfixCalculator;
 import Code.Interfaces.Token;
 import Code.Lib.ColorChanger;
+import Code.Lib.LabelMarker;
 import Code.Lib.LinkedListStack;
 
 import java.util.ArrayList;
@@ -20,6 +21,10 @@ public class PostfixCalculator implements IPostfixCalculator
     // NOTE: Evaluate a list of Tokens...
     @Override public int evaluateExpression(ArrayList<Token> tokenList) throws Exception
     {
+        if(tokenList.isEmpty())
+        {
+            throw new Exception(LabelMarker.makeLabel("ERROR","red","Expression missing!"));
+        }
         boolean isFirst = true;
         for (Token token: tokenList)
         {
@@ -47,7 +52,6 @@ public class PostfixCalculator implements IPostfixCalculator
         {
             throw new Exception(ColorChanger.RED()+"Invalid expression - STACK NOT EMPTY"+ColorChanger.RESET());
         }
-
 
         return expressionTotal;
     }
@@ -81,29 +85,28 @@ public class PostfixCalculator implements IPostfixCalculator
         int valueTwo = (int) num2.getValue();
         String operatorAsString = (String) operator.getValue();
 
-
-
         // ¤ CHECK OPERATOR
         switch (operatorAsString)
         {
             case "+" ->
             {
-                System.out.println(ColorChanger.GREEN() +"[ADD]: " + valueOne + " + " + valueTwo + " = " + (valueOne + valueTwo)+ ColorChanger.RESET());
+
+                System.out.println(LabelMarker.makeLabel("ADD","Green",valueOne + " + " + valueTwo + " = " + (valueOne + valueTwo)));
                 return valueOne + valueTwo;
             }
             case "-" ->
             {
-                System.out.println(ColorChanger.RED()+ "[MINUS]: " + valueOne + " - " + valueTwo + " = " + (valueOne - valueTwo) + ColorChanger.RESET());
+                System.out.println(LabelMarker.makeLabel("MINUS","RED",valueOne + " - " + valueTwo + " = " + (valueOne - valueTwo)));
                 return valueOne - valueTwo;
             }
             case "*" ->
             {
-                System.out.println(ColorChanger.BLUE()+"[MULTIPLY]: " + valueOne + " * " + valueTwo + " = " + (valueOne * valueTwo) + ColorChanger.RESET());
+                System.out.println(LabelMarker.makeLabel("MULTIPLY","blue",valueOne + " * " + valueTwo + " = " + (valueOne * valueTwo)));
                 return valueOne * valueTwo;
             }
             case "/" ->
             {
-                System.out.println(ColorChanger.YELLOW() + "[DIVIDE]: " + valueOne + " / " + valueTwo + " = " + (valueOne / valueTwo) + ColorChanger.RESET());
+                System.out.println(LabelMarker.makeLabel("DIVIDE","yellow",valueOne + " / " + valueTwo + " = " + (valueOne / valueTwo)));
                 return valueOne / valueTwo;
             }
         }

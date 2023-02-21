@@ -33,7 +33,7 @@ public class ColorChanger
     {
         return "\u001b[35;1m";
     }
-
+    public static String WHITE() {return "\u001b[37;1m";}
 
 
 }
